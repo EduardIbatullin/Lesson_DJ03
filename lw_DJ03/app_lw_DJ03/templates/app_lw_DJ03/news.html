@@ -1,20 +1,32 @@
 {% extends 'app_lw_DJ02\layoute.html' %}
 {% block title %}
-    <title>Страница Новостей</title>
+    Страница Новостей
 {% endblock %}
 
 {% block content %}
-    <h1>Урок №3 по изучению фреймворка Django</h1>
-    <h2>Новостная страница</h2>
+    <div class="container">
+        <h1 class="my-4">Урок №3 по изучению фреймворка Django</h1>
+        <h2 class="mb-4">Новостная страница</h2>
 
-    {% for new in news %}
-        <div>
-            <h3>{{ new.title }}</h3>
-            <p>{{ new.short_description }}</p>
-            <p>{{ new.text }}</p>
-            <p>{{ new.author }} запостил новость {{ new.pub_date }}</p>
-        </div>
+        {% for new in news %}
+            <div class="card mb-4 w-100">
+                <div class="card-body">
+                    <h3 class="card-title">{{ new.title }}</h3>
+                    <p class="card-text">{{ new.short_description }}</p>
+                    <button class="btn btn-primary" onclick="toggleFullText('{{ new.id }}')">Подробнее</button>
+                    <div id="full-text-{{ new.id }}" class="full-text mt-3" style="display:none;">
+                        <p>{{ new.text }}</p>
+                        <p class="text-muted">Автор: {{ new.author }} | Дата: {{ new.pub_date }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-    {% endfor %}
-
+    <script>
+        function toggleFullText(newsId) {
+            const fullTextDiv = document.getElementById('full-text-' + newsId);
+            fullTextDiv.style.display = (fullTextDiv.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
 {% endblock %}
