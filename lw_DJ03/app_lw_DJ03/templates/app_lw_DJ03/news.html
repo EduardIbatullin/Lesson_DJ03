@@ -1,0 +1,20 @@
+{% extends 'app_lw_DJ02\layoute.html' %}
+{% block title %}
+    <title>Страница Новостей</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Урок №3 по изучению фреймворка Django</h1>
+    <h2>Новостная страница</h2>
+
+    {% for new in news %}
+        <div>
+            <h3>{{ new.title }}</h3>
+            <p>{{ new.short_description }}</p>
+            <p>{{ new.text }}</p>
+            <p>{{ new.author }} запостил новость {{ new.pub_date }}</p>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
